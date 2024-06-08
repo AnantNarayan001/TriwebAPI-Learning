@@ -1,50 +1,52 @@
-//java code for the basis of java that are known to me.
-//inheritance 
-class Animal {
-    void sound() {
-        System.out.println("Animal makes a sound");
-    }
-}
+def add(x, y):
+    return x + y
 
-class Dog extends Animal {
-    @Override
-    void sound() {
-        System.out.println("Dog barks");
-    }
+def subtract(x, y):
+    return x - y
 
-    void specificDogBehavior() {
-        System.out.println("Dog wags its tail");
-    }
-}
+def multiply(x, y):
+    return x * y
 
-class CustomException extends Exception {
-    public CustomException(String message) {
-        super(message);
-    }
-}
+def divide(x, y):
+    if y == 0:
+        raise ValueError("Cannot divide by zero!")
+    return x / y
 
-public class Main {
-    public static void main(String[] args) {
-        Animal myAnimal = new Animal();
-        Dog myDog = new Dog();
+def calculator():
+    print("Select operation:")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+    
+    while True:
+        choice = input("Enter choice(1/2/3/4): ")
 
-        myAnimal.sound(); 
-        myDog.sound();   
+        if choice in ['1', '2', '3', '4']:
+            try:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
+            except ValueError:
+                print("Invalid input! Please enter numeric values.")
+                continue
 
-        // Demonstration try, catch, throw, and finally
-        try {
-            testException();
-        } catch (CustomException e) {
-            System.out.println("Caught CustomException: " + e.getMessage());
-        } finally {
-            System.out.println("This is the finally block, it always executes.");
-        }
-    }
+            if choice == '1':
+                print(f"The result is: {add(num1, num2)}")
+            elif choice == '2':
+                print(f"The result is: {subtract(num1, num2)}")
+            elif choice == '3':
+                print(f"The result is: {multiply(num1, num2)}")
+            elif choice == '4':
+                try:
+                    print(f"The result is: {divide(num1, num2)}")
+                except ValueError as e:
+                    print(e)
+        else:
+            print("Invalid input! Please enter a number between 1 and 4.")
 
-    static void testException() throws CustomException {
-        boolean someCondition = true; // You can change this to false to see different behaviors
-        if (someCondition) {
-            throw new CustomException("Something went wrong!");
-        }
-    }
-}
+        next_calculation = input("Do you want to perform another calculation? (yes/no): ")
+        if next_calculation.lower() != 'yes':
+            break
+
+if __name__ == "__main__":
+    calculator()
